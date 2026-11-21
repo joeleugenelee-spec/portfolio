@@ -44,3 +44,8 @@ select l.created_at, l.tier, l.score, l.name, l.email, l.phone, l.handle, l.role
        l.blocker
 from public.leads l
 order by (l.tier = 'hot') desc, l.created_at desc;
+
+-- The public key may add rows and nothing else.
+revoke all on public.leads, public.lead_packages from anon, authenticated;
+grant insert on public.leads, public.lead_packages to anon;
+revoke all on public.leads_overview from anon, authenticated;
