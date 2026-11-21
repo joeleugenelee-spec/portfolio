@@ -48,6 +48,8 @@ img,video,canvas{display:block}
 #hero{position:relative;height:100vh;height:100svh;min-height:560px;background:radial-gradient(120% 90% at 50% 20%,#f4f3f0,var(--paper) 70%);overflow:hidden}
 .hero-type{position:absolute;left:0;right:0;top:15vh;text-align:center;font-weight:700;font-size:clamp(54px,12.4vw,250px);line-height:.8;letter-spacing:-.045em;white-space:nowrap;will-change:transform}
 .hero-type span{display:block}
+.hero-type a{display:block;cursor:pointer}
+@media (hover:hover) and (pointer:fine){.hero-type a .l1{transition:letter-spacing .5s var(--ease)}.hero-type a:hover .l1{letter-spacing:-.03em}}
 .hero-type .l2{background:linear-gradient(180deg,#77777a 5%,rgba(150,150,152,.25) 75%,rgba(150,150,152,0) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero-me{position:absolute;left:50%;bottom:-2vh;height:min(76vh,calc(100vh - 16vw));height:min(76svh,calc(100svh - 16vw));min-height:320px;width:auto;max-width:none;transform:translateX(-40%);will-change:transform;
   filter:drop-shadow(0 30px 40px rgba(0,0,0,.18))}
@@ -292,7 +294,7 @@ img,video,canvas{display:block}
 <main>
 <!-- ============================== HERO -->
 <section id="hero">
-  <h1 class="hero-type caps"><span class="l1">Explore my</span><span class="l2">Portfolio</span></h1>
+  <h1 class="hero-type caps"><a data-book href="#talk" aria-label="Book a call now"><span class="l1">Book a</span><span class="l2">Call now</span></a></h1>
   <img class="hero-me" src="img/me-car.png" alt="Yejin Lee in a leather jacket, leaning on a Mustang" width="1898" height="2024">
   <div class="hero-fade"></div>
   <div class="hero-l caps">(Scroll)&nbsp;&nbsp; Yejin Lee, 2026</div>
