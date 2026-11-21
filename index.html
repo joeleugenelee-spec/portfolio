@@ -1,0 +1,830 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Yejin Lee — Portfolio</title>
+<meta name="description" content="Yejin Lee. Exited an app at 17, made $90,000 in three months on TikTok Live, and built 1971 into the #1 TikTok Live agency in the world.">
+<meta name="theme-color" content="#0b0b0e">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#ecebe7; --ink:#17171a; --night:#0b0b0e; --night-2:#101116; --mute:#8b8b90; --line:rgba(255,255,255,.14);
+  --sans:"Outfit","Helvetica Neue",Arial,sans-serif; --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --ease:cubic-bezier(.23,1,.32,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--night);-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body.loading{overflow:hidden;height:100vh}
+a{color:inherit;text-decoration:none}
+img,video,canvas{display:block}
+.pin{position:relative}
+.sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.caps{text-transform:uppercase;letter-spacing:.08em}
+.mono{font-family:var(--mono)}
+
+/* ------------------------------------------------ loader */
+#loader{position:fixed;inset:0;z-index:100;background:var(--night);display:grid;place-items:center;transition:opacity .7s var(--ease),visibility .7s}
+#loader.done{opacity:0;visibility:hidden}
+#loader .word{color:#fff;font-weight:700;font-size:clamp(28px,4.2vw,58px);letter-spacing:.32em;padding-left:.32em;text-shadow:0 0 22px rgba(255,255,255,.75),0 0 60px rgba(255,255,255,.35)}
+#loader svg{position:absolute;left:50%;top:50%;width:min(62vw,430px);height:min(62vw,430px);transform:translate(-50%,-50%);overflow:visible}
+#loader path{fill:none;stroke:#fff;stroke-width:1.6;stroke-linecap:round;filter:drop-shadow(0 0 6px rgba(255,255,255,.8))}
+
+/* ------------------------------------------------ nav */
+.nav{position:fixed;z-index:50;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:22px clamp(18px,3.2vw,44px);
+  font-size:11px;font-weight:500;color:#fff;mix-blend-mode:difference;pointer-events:none}
+.nav a{pointer-events:auto}
+.nav .logo{font-weight:700;font-size:15px;letter-spacing:.22em}
+.nav ul{display:flex;gap:clamp(14px,2.6vw,38px);list-style:none}
+.nav ul a{opacity:.7;transition:opacity .2s}
+.nav .book{border:1px solid rgba(255,255,255,.6);border-radius:99px;padding:8px 14px}
+@media (hover:hover){.nav ul a:hover{opacity:1}}
+@media (max-width:760px){.nav ul{display:none}}
+
+/* ------------------------------------------------ hero */
+#hero{position:relative;height:100vh;height:100svh;min-height:560px;background:radial-gradient(120% 90% at 50% 20%,#f4f3f0,var(--paper) 70%);overflow:hidden}
+.hero-type{position:absolute;left:0;right:0;top:15vh;text-align:center;font-weight:700;font-size:clamp(54px,12.4vw,250px);line-height:.8;letter-spacing:-.045em;white-space:nowrap;will-change:transform}
+.hero-type span{display:block}
+.hero-type .l2{background:linear-gradient(180deg,#77777a 5%,rgba(150,150,152,.25) 75%,rgba(150,150,152,0) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-me{position:absolute;left:50%;bottom:-2vh;height:min(76vh,calc(100vh - 16vw));height:min(76svh,calc(100svh - 16vw));min-height:320px;width:auto;max-width:none;transform:translateX(-40%);will-change:transform;
+  filter:drop-shadow(0 30px 40px rgba(0,0,0,.18))}
+.hero-fade{position:absolute;left:0;right:0;bottom:0;height:16vh;background:linear-gradient(180deg,rgba(236,235,231,0),var(--paper));pointer-events:none}
+.hero-l,.hero-r{position:absolute;bottom:clamp(22px,5vh,54px);font-size:10.5px;color:#55555a;line-height:1.7}
+.hero-l{left:clamp(18px,3.2vw,44px)}
+.hero-r{right:clamp(18px,3.2vw,44px);text-align:right;max-width:290px}
+.hero-r b{display:block;color:var(--ink);font-weight:600;margin-top:12px}
+@media (max-width:760px){
+  .hero-type{top:17vh;font-size:16.4vw}
+  .hero-me{height:60svh}
+  .hero-r{font-size:9.5px}.hero-r span{display:none}.hero-l{bottom:44px}.hero-r{bottom:22px;left:18px;text-align:left}
+}
+
+/* ------------------------------------------------ about */
+#about{height:430vh;background:var(--night)}
+#swirl{position:absolute;inset:0;width:100%;height:100%}
+.ab-card{position:absolute;inset:0;background:#07070a;will-change:clip-path}
+.ab-card .beam{position:absolute;inset:0;background:
+  linear-gradient(118deg,transparent 38%,rgba(255,255,255,.34) 50%,transparent 62%),
+  radial-gradient(40% 55% at 50% 50%,rgba(255,255,255,.16),transparent 70%),#07070a}
+.ab-card img.spot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}
+.ab-card .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.72),rgba(0,0,0,.15) 34%,rgba(0,0,0,.2) 55%,rgba(0,0,0,.86));opacity:0}
+.ab-word{position:absolute;left:50%;top:50%;color:#fff;font-weight:700;font-size:clamp(34px,5.4vw,92px);letter-spacing:-.03em;line-height:.9;text-shadow:0 0 30px rgba(255,255,255,.45);white-space:nowrap;will-change:transform,opacity}
+.ab-over{position:absolute;inset:0;color:#fff;opacity:0;pointer-events:none}
+.ab-over.on{pointer-events:auto}
+.ab-head{position:absolute;left:clamp(34px,6vw,96px);top:clamp(70px,13vh,130px);max-width:min(46vw,620px);font-size:clamp(11px,1.05vw,15px);font-weight:600;line-height:1.5}
+.ab-tag{position:absolute;right:clamp(34px,6vw,96px);top:clamp(70px,13vh,130px);font-size:10.5px;color:rgba(255,255,255,.7)}
+.ab-copy{position:absolute;left:clamp(34px,6vw,96px);bottom:clamp(54px,11vh,110px);max-width:min(46vw,560px)}
+.ab-copy .k{font-size:10px;color:rgba(255,255,255,.6);margin-bottom:10px}
+.ab-copy p{font-size:clamp(12px,1.08vw,15.5px);font-weight:600;line-height:1.55}
+.ab-btns{position:absolute;right:clamp(34px,6vw,96px);bottom:clamp(54px,11vh,110px);display:flex;gap:10px}
+.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.55);border-radius:99px;padding:10px 18px;font-size:10.5px;font-weight:600;color:#fff;transition:transform .16s var(--ease),background .2s,color .2s}
+.pill.fill{background:#fff;color:#0b0b0e;border-color:#fff}
+.pill:active{transform:scale(.97)}
+@media (hover:hover){.pill:hover{background:#fff;color:#0b0b0e}}
+.ab-clip{position:absolute;right:clamp(34px,6vw,96px);top:50%;height:min(48vh,440px);aspect-ratio:9/16;transform:translateY(-50%);border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.22);box-shadow:0 30px 80px rgba(0,0,0,.6);background:#000}
+.ab-clip video{width:100%;height:100%;object-fit:cover}
+.ab-clip span{position:absolute;left:10px;bottom:10px;font-size:9px;background:rgba(0,0,0,.55);padding:4px 8px;border-radius:6px}
+@media (max-width:760px){
+  .ab-head{max-width:78vw}.ab-tag{display:none}
+  .ab-copy{max-width:none;right:34px;bottom:124px}
+  .ab-btns{left:34px;right:auto;bottom:62px}
+  .ab-clip{height:30vh;top:40%;right:34px}
+}
+
+.ab-card .beam{background:
+  linear-gradient(112deg,transparent 30%,rgba(255,255,255,.2) 47%,rgba(255,255,255,.05) 56%,transparent 66%),
+  radial-gradient(46% 60% at 64% 58%,rgba(255,255,255,.13),transparent 72%),#07070a}
+.ab-fig{position:absolute;right:clamp(20px,5vw,90px);bottom:clamp(40px,11vh,120px);width:min(50vw,74vh,760px);opacity:0;will-change:transform,opacity}
+.ab-fig img{width:100%;height:auto;filter:drop-shadow(0 40px 60px rgba(0,0,0,.7))}
+.ab-fig::after{content:"";position:absolute;left:4%;right:4%;bottom:-3%;height:12%;background:radial-gradient(50% 50% at 50% 50%,rgba(255,255,255,.16),transparent 70%);z-index:-1}
+.ab-copy{bottom:clamp(54px,12vh,130px);max-width:min(40vw,560px)}
+.ab-copy .k{font-size:clamp(13px,1.2vw,17px);font-weight:600;color:rgba(255,255,255,.7);margin-bottom:16px}
+.ab-copy p{font-size:clamp(17px,1.75vw,27px);font-weight:500;line-height:1.36;letter-spacing:-.01em}
+.ab-clip{right:auto;left:clamp(34px,6vw,96px);top:clamp(128px,24vh,230px);transform:none;height:min(27vh,250px)}
+@media (max-width:760px){
+  .ab-fig{right:4vw;left:4vw;width:auto;bottom:auto;top:15vh}
+  .ab-head{display:none}
+  .ab-copy{max-width:none;left:34px;right:34px;bottom:64px}
+  .ab-copy p{font-size:16px}
+  .ab-clip{left:auto;right:34px;top:auto;bottom:calc(64px + 215px);height:18vh}
+}
+
+/* About v3: no painting, no box. Black stage, one spotlight, the words open and the car arrives. */
+#about .sticky{background:radial-gradient(90% 70% at 50% 110%,#17171c,#060608 70%)}
+.ab-beam{position:absolute;inset:-25%;opacity:0;will-change:opacity,transform;background:
+  linear-gradient(112deg,transparent 36%,rgba(255,255,255,.2) 48%,rgba(255,255,255,.06) 56%,transparent 66%);filter:blur(18px)}
+#dust{position:absolute;inset:0;width:100%;height:100%;opacity:.7}
+.ab-word{font-size:clamp(64px,17vw,300px);line-height:.8;letter-spacing:-.045em;text-shadow:0 0 60px rgba(255,255,255,.28)}
+.ab-fig{right:clamp(20px,5vw,90px);bottom:clamp(40px,11vh,120px);width:min(54vw,80vh,860px)}
+#about .sticky::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 90% at 50% 45%,transparent 55%,rgba(0,0,0,.75))}
+.ab-over{z-index:2}
+@media (max-width:760px){.ab-word{font-size:25vw}}
+
+/* ------------------------------------------------ where I've been */
+#been{height:740vh;background:var(--night-2);color:#fff}
+#been .sticky{background:var(--night-2)}
+.bn-bg{position:absolute;left:0;white-space:nowrap;font-weight:700;font-size:clamp(90px,15vw,260px);letter-spacing:-.02em;line-height:1;color:rgba(255,255,255,.055);will-change:transform;user-select:none}
+.bn-bg.a{top:16vh}.bn-bg.b{bottom:9vh}
+.bn-label{position:absolute;left:clamp(18px,3.2vw,44px);top:clamp(70px,11vh,104px);font-size:10px;font-weight:600;color:rgba(255,255,255,.75)}
+.bn-prog{position:absolute;right:clamp(18px,3.2vw,44px);top:clamp(74px,11.4vh,108px);width:min(22vw,180px);height:2px;background:rgba(255,255,255,.14)}
+.bn-prog i{display:block;height:100%;width:100%;background:#fff;transform-origin:0 50%;transform:scaleX(0)}
+.bn-track{position:absolute;left:0;top:0;height:100%;display:flex;align-items:center;will-change:transform;--v:0}
+.bn-panel{flex:none;width:min(70vw,980px);padding:0 clamp(24px,5vw,80px);display:flex;gap:clamp(20px,3vw,50px);align-items:center}
+.bn-panel.intro{width:min(64vw,820px)}
+.bn-panel.wide{width:min(96vw,1280px)}
+.bn-meta{display:flex;gap:14px;align-items:center;font-size:9.5px;font-weight:600;color:rgba(255,255,255,.6);margin-bottom:14px}
+.bn-meta b{background:#fff;color:#0b0b0e;border-radius:4px;padding:3px 7px;font-weight:700}
+.bn-panel h2{font-weight:700;font-size:clamp(40px,6.2vw,104px);line-height:.92;letter-spacing:-.035em;
+  text-shadow:calc(var(--v)*1px) 0 0 rgba(255,255,255,.34),calc(var(--v)*2.1px) 0 0 rgba(255,255,255,.16)}
+.bn-panel p{margin-top:18px;font-size:clamp(13px,1.1vw,16px);font-weight:500;line-height:1.5;color:rgba(255,255,255,.86);max-width:460px}
+.bn-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:clamp(22px,5vh,48px);max-width:560px}
+.bn-facts dt{font-size:8.5px;font-weight:600;color:rgba(255,255,255,.5);margin-bottom:6px}
+.bn-facts dd{font-size:13px;font-weight:600;line-height:1.4}
+.bn-shot{flex:none;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 70px rgba(0,0,0,.55);background:#000}
+.bn-shot img{width:100%;height:100%;object-fit:cover}
+.bn-shot.land{width:min(40vw,520px);aspect-ratio:860/378}
+.bn-shot.tall{height:min(62vh,560px);aspect-ratio:1179/1495}
+.bn-shot figcaption{font-size:9px;padding:8px 10px;color:rgba(255,255,255,.6);background:#0b0b0e}
+.bn-tabs{position:absolute;left:clamp(18px,3.2vw,44px);bottom:clamp(20px,4.5vh,40px);display:flex;gap:8px}
+.bn-tabs span{font-size:9px;font-weight:700;border-radius:5px;padding:5px 9px;color:rgba(255,255,255,.55);transition:background .25s,color .25s}
+.bn-tabs span.on{background:#fff;color:#0b0b0e}
+@media (max-width:760px){
+  .bn-panel,.bn-panel.intro{width:92vw}
+  .bn-panel.wide{width:92vw;flex-direction:column;align-items:flex-start;gap:18px}
+  .bn-panel.wide p{margin-top:10px}.bn-panel.wide .bn-facts{margin-top:14px}
+  .bn-panel h2{font-size:13vw}
+  .bn-shot.land{width:78vw}.bn-shot.tall{height:27vh}
+  .bn-facts{gap:12px}.bn-facts dd{font-size:11px}
+}
+
+/* ------------------------------------------------ featured / ribbon */
+#featured{height:430vh;background:var(--paper)}
+#featured .sticky{background:radial-gradient(120% 90% at 50% 30%,#f6f5f2,var(--paper) 70%)}
+.ft-top,.ft-bottom{position:absolute;left:clamp(18px,3.2vw,44px);font-weight:500;font-size:clamp(17px,2vw,30px);letter-spacing:-.01em;color:#3c3c40}
+.ft-top{top:clamp(74px,12vh,112px);color:#8a8a8d}
+.ft-bottom{bottom:clamp(22px,5vh,46px)}
+#ribbon{position:absolute;inset:0;width:100%;height:100%}
+.ft-cap{position:absolute;left:50%;top:70%;transform:translateX(-50%);text-align:center;font-size:11px;color:#55555a;line-height:1.6;white-space:nowrap}
+.ft-cap b{display:block;color:var(--ink);font-weight:600;font-size:12.5px}
+.ft-cap i{font-style:normal;font-family:var(--mono);font-size:9.5px;color:#9a9a9d}
+.ft-flat{display:none;position:absolute;left:0;top:50%;gap:18px;transform:translateY(-50%);will-change:transform}
+.ft-flat img{width:min(62vw,620px);aspect-ratio:16/9;object-fit:cover;border-radius:10px}
+.noweb #ribbon{display:none}.noweb .ft-flat{display:flex}
+
+/* ------------------------------------------------ works */
+#works{height:760vh;background:var(--paper)}
+#works .sticky{background:radial-gradient(120% 90% at 50% 40%,#f6f5f2,var(--paper) 70%);perspective:1300px}
+.wk-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:clamp(13px,1.35vw,20px);font-weight:500;letter-spacing:.02em;color:#2a2a2e}
+.wk-name{position:absolute;left:clamp(18px,7vw,120px);top:50%;transform:translateY(-50%);max-width:min(26vw,300px);opacity:0}
+.wk-name b{display:block;font-weight:500;font-size:clamp(13px,1.3vw,19px);letter-spacing:.03em}
+.wk-name span{display:block;margin-top:8px;font-size:11.5px;line-height:1.5;color:#66666b}
+.wk-list{position:absolute;right:clamp(18px,5vw,84px);top:clamp(84px,19vh,190px);list-style:none;text-align:right;font-family:var(--mono);font-size:10.5px;line-height:2;color:#b3b3b3}
+.wk-list li{transition:color .25s}
+.wk-list{color:#a2a2a4}
+.wk-list li.on{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+.wk-hint{position:absolute;left:50%;bottom:clamp(18px,4vh,36px);transform:translateX(-50%);font-family:var(--mono);font-size:9.5px;color:#9a9a9d;white-space:nowrap}
+.wk-card{position:absolute;left:50%;top:50%;width:var(--cw);aspect-ratio:16/10;border-radius:8px;overflow:hidden;will-change:transform,opacity;backface-visibility:hidden;
+  box-shadow:0 18px 40px rgba(0,0,0,.2);background:#111;color:#fff}
+.wk-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.wk-card .chip{position:absolute;left:8%;bottom:9%;font-family:var(--mono);font-size:calc(var(--cw)*.036);background:#0b0b0e;color:#fff;padding:.35em .7em;border-radius:3px;white-space:nowrap}
+.wk-card .big{position:absolute;left:8%;top:12%;font-weight:700;font-size:calc(var(--cw)*.15);line-height:.9;letter-spacing:-.04em}
+.wk-card .sm{position:absolute;right:8%;top:14%;font-size:calc(var(--cw)*.034);font-weight:600;text-align:right;line-height:1.5;opacity:.75}
+.wk-card.light{background:linear-gradient(180deg,#fbfaf8,#d9d8d4);color:var(--ink)}
+.wk-card.dark{background:radial-gradient(90% 120% at 80% 0%,#3a3a40,#0d0d10 70%)}
+@media (max-width:760px){
+  .wk-list{display:none}
+  .wk-name{left:0;right:0;top:15vh;transform:none;max-width:none;text-align:center;padding:0 24px}
+}
+
+.wk-card.app{background:radial-gradient(90% 120% at 15% 0%,#34343a,#0c0c0f 70%)}
+.wk-card.app img.s{inset:auto;top:9%;height:150%;width:auto;border-radius:calc(var(--cw)*.03);box-shadow:0 10px 24px rgba(0,0,0,.5)}
+.wk-card.app img.s1{right:33%}.wk-card.app img.s2{right:5%;top:17%}
+.wk-card.app img.ic{inset:auto;left:8%;top:13%;width:24%;height:auto;aspect-ratio:1;border-radius:22%;box-shadow:0 8px 20px rgba(0,0,0,.5)}
+
+/* ------------------------------------------------ reviews */
+#reviews{background:var(--paper);padding:clamp(70px,14vh,150px) clamp(18px,3.2vw,44px) 0;text-align:center}
+#reviews h2{font-weight:500;font-size:clamp(26px,3.5vw,54px);letter-spacing:-.02em}
+#reviews .sub{margin:14px auto 0;max-width:560px;font-size:10.5px;line-height:1.8;color:#77777b}
+.rv-grid{margin:clamp(30px,6vh,60px) auto 0;max-width:1180px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;text-align:left;align-items:start}
+.rv-app{border:1px solid rgba(0,0,0,.1);border-radius:20px;padding:22px;background:rgba(255,255,255,.5)}
+.rv-head{display:flex;gap:14px;align-items:center}
+.rv-head img{width:56px;height:56px;border-radius:22%;box-shadow:0 6px 16px rgba(0,0,0,.18)}
+.rv-head b{display:block;font-weight:600;font-size:17px;letter-spacing:-.01em}
+.rv-head span{font-size:12px;color:#66666b}
+.rv-head span i{font-style:normal;color:var(--ink);font-weight:600}
+.rv-list{margin-top:16px;display:grid;gap:10px}
+.rv-item{background:#0d0d11;color:#fff;border-radius:14px;padding:14px 16px}
+.rv-item .st{font-size:11px;letter-spacing:.12em}
+.rv-item h3{margin-top:6px;font-size:13.5px;font-weight:600}
+.rv-item p{margin-top:5px;font-size:12.5px;line-height:1.5;color:rgba(255,255,255,.8);overflow-wrap:anywhere}
+.rv-item small{display:block;margin-top:8px;font-family:var(--mono);font-size:9.5px;color:rgba(255,255,255,.5)}
+.rv-app>a{display:inline-block;margin-top:14px;font-size:10.5px;font-weight:700;border-bottom:1px solid currentColor;padding-bottom:2px}
+@media (max-width:900px){.rv-grid{grid-template-columns:1fr}}
+
+/* ------------------------------------------------ services */
+#services{background:var(--paper);padding:clamp(90px,18vh,190px) clamp(18px,3.2vw,44px) clamp(80px,14vh,150px);text-align:center}
+#services h2{font-weight:500;font-size:clamp(26px,3.5vw,54px);letter-spacing:-.02em}
+#services .sub{margin:14px auto 0;max-width:560px;font-size:10.5px;line-height:1.8;color:#77777b}
+.sv-list{margin:clamp(34px,7vh,70px) auto 0;max-width:820px;display:grid;gap:12px;text-align:left}
+.sv{border:1px solid rgba(0,0,0,.12);border-radius:16px;overflow:hidden;transition:background .35s var(--ease),color .35s var(--ease),border-color .35s}
+.sv button{all:unset;box-sizing:border-box;width:100%;cursor:pointer;display:grid;grid-template-columns:28px 1fr 28px;align-items:center;padding:17px 22px;font-size:10.5px;font-weight:600;text-align:center;color:#8d8d90}
+.sv button:focus-visible{outline:2px solid var(--ink);outline-offset:-4px;border-radius:16px}
+.sv button i{font-style:normal;font-family:var(--mono);font-size:10px;text-align:left}
+.sv button u{text-decoration:none;text-align:right;transition:transform .3s var(--ease)}
+.sv .body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+.sv .body>div{overflow:hidden}
+.sv .in{padding:2px 22px 22px;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:end}
+.sv .in p{font-size:clamp(13px,1.15vw,15.5px);font-weight:500;line-height:1.55;max-width:560px}
+.sv .in small{display:block;margin-top:14px;font-family:var(--mono);font-size:9.5px;color:rgba(255,255,255,.62)}
+.sv .in a{font-size:10.5px;font-weight:700;border-bottom:1px solid currentColor;padding-bottom:2px;white-space:nowrap}
+.sv.open{background:#0d0d11;color:#fff;border-color:#0d0d11;box-shadow:0 24px 60px rgba(0,0,0,.22)}
+.sv.open button{color:#fff}.sv.open button u{transform:rotate(180deg)}
+.sv.open .body{grid-template-rows:1fr}
+@media (max-width:600px){.sv .in{grid-template-columns:1fr}}
+
+/* ------------------------------------------------ talk */
+#talk{position:relative;background:linear-gradient(180deg,#101116,#0a0a0d);color:#fff;min-height:100vh;min-height:100svh;display:grid;place-items:center;padding:120px 20px 90px;text-align:center;overflow:hidden}
+#talk h2{font-weight:700;font-size:clamp(58px,13.2vw,240px);line-height:.9;letter-spacing:-.045em;background:linear-gradient(180deg,#fff 30%,#77777c);-webkit-background-clip:text;background-clip:text;color:transparent;will-change:transform,opacity}
+.tk-link{display:block;cursor:pointer;--mx:50%;--my:50%;--on:0;-webkit-tap-highlight-color:transparent}
+#talk .tk-link h2{background:radial-gradient(circle calc(8vw + var(--on) * 26vw) at var(--mx) var(--my),#fff 0%,#fff 35%,rgba(255,255,255,0) 100%),linear-gradient(180deg,#8d8d93 20%,#3b3b41);
+  -webkit-background-clip:text;background-clip:text;color:transparent;transition:letter-spacing .5s var(--ease)}
+.tk-link:focus-visible{outline:2px solid #fff;outline-offset:12px;border-radius:12px}
+.tk-link:active h2{letter-spacing:-.055em}
+.tk-hint{display:inline-block;margin-top:clamp(18px,4vh,36px);font-size:11px;font-weight:600;color:rgba(255,255,255,.55);transition:color .3s,transform .4s var(--ease)}
+@media (hover:hover) and (pointer:fine){
+  .tk-link:hover{--on:1}
+  #talk .tk-link:hover h2{letter-spacing:-.035em;filter:drop-shadow(0 0 40px rgba(255,255,255,.35))!important}
+  .tk-link:hover .tk-hint{color:#fff;transform:translateY(4px)}
+}
+@media (hover:none){#talk .tk-link h2{background:linear-gradient(180deg,#fff 30%,#77777c);-webkit-background-clip:text;background-clip:text}}
+.tk-pills{margin-top:clamp(22px,5vh,46px);display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.tk-foot{position:absolute;left:clamp(18px,3.2vw,44px);right:clamp(18px,3.2vw,44px);bottom:24px;display:flex;justify-content:space-between;font-size:9px;color:rgba(255,255,255,.5)}
+
+@media (prefers-reduced-motion:reduce){
+  #loader{transition:none}.sv .body,.sv{transition:none}
+}
+</style>
+</head>
+<body class="loading">
+
+<div id="loader" aria-hidden="true">
+  <svg viewBox="-110 -110 220 220"><path id="blob" d=""/></svg>
+  <div class="word">YEJIN.</div>
+</div>
+
+<header class="nav caps">
+  <a class="logo" href="#hero">YEJIN&bull;</a>
+  <ul>
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#been">Journey</a></li>
+    <li><a href="#featured">Proof</a></li>
+    <li><a href="#works">Works</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#services">Coaching</a></li>
+  </ul>
+  <a class="book" data-book href="#talk">Book a call</a>
+</header>
+
+<main>
+<!-- ============================== HERO -->
+<section id="hero">
+  <h1 class="hero-type caps"><span class="l1">Explore my</span><span class="l2">Portfolio</span></h1>
+  <img class="hero-me" src="img/me-car.png" alt="Yejin Lee in a leather jacket, leaning on a Mustang" width="1898" height="2024">
+  <div class="hero-fade"></div>
+  <div class="hero-l caps">(Scroll)&nbsp;&nbsp; Yejin Lee, 2026</div>
+  <div class="hero-r caps"><span>Exited an app at 17. $90,000 in three months on TikTok Live. Founder of 1971, ranked #1 globally.</span>
+    <b>Apps &middot; TikTok Live &middot; 1971</b></div>
+</section>
+
+<!-- ============================== ABOUT -->
+<section id="about" class="pin">
+  <div class="sticky">
+    <div class="ab-beam" aria-hidden="true"></div>
+    <canvas id="dust" aria-hidden="true"></canvas>
+    <div class="ab-fig"><img src="img/mclaren-cut.png" alt="Yejin Lee walking up to a white McLaren with its door open" loading="lazy"></div>
+    <div class="ab-word a caps">About</div>
+    <div class="ab-word b caps">Me</div>
+    <div class="ab-over">
+      <div class="ab-head caps">From going live on TikTok to running the #1 TikTok Live agency in the world</div>
+      <div class="ab-clip"><video src="img/clip.mp4" poster="img/clip-poster.jpg" muted loop playsinline preload="none"></video><span class="mono">POV</span></div>
+      <div class="ab-copy">
+        <div class="k caps">Who I am</div>
+        <p>I exited my first app at 17. Then I started going live on TikTok and made $90,000 within three months. Two months later I started my own agency, 1971, and within three months it was ranked #1 globally.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== WHERE I'VE BEEN -->
+<section id="been" class="pin">
+  <div class="sticky">
+    <div class="bn-bg a caps" aria-hidden="true">Fight AI &mdash; MTW Athletics &mdash; TikTok Live &mdash; 1971 &mdash; #1 Globally &mdash; Fight AI &mdash; MTW Athletics</div>
+    <div class="bn-bg b caps" aria-hidden="true">Age 17 &mdash; $90,000 &mdash; 3 months &mdash; Rank 01 &mdash; $250,000 a month &mdash; Age 17 &mdash; $90,000</div>
+    <div class="bn-label caps" id="bnLabel">Origin</div>
+    <div class="bn-prog"><i id="bnProg"></i></div>
+
+    <div class="bn-track" id="bnTrack">
+      <article class="bn-panel intro" data-label="Origin" data-tab="0">
+        <div>
+          <div class="bn-meta caps"><b>Journey</b> In order</div>
+          <h2 class="caps">Where<br>I've been</h2>
+          <p>How I went from almost failing out of high school to making $250,000 a month.</p>
+        </div>
+      </article>
+
+      <article class="bn-panel" data-label="The first app" data-tab="0">
+        <div>
+          <div class="bn-meta caps"><b>01</b> Age 17</div>
+          <h2 class="caps">Fight AI<br>Exited</h2>
+          <p>An app I built with a friend. We exited it when I was 17.</p>
+          <dl class="bn-facts caps"><div><dt>Age</dt><dd>17</dd></div><div><dt>Built with</dt><dd>A friend</dd></div><div><dt>Outcome</dt><dd>Exited</dd></div></dl>
+        </div>
+      </article>
+
+      <article class="bn-panel" data-label="The big fail" data-tab="0">
+        <div>
+          <div class="bn-meta caps"><b>02</b> Around the same time</div>
+          <h2 class="caps">MTW Athletics<br>A big fail</h2>
+          <p>Around the same time as Fight AI, I started a supplement brand called MTW Athletics. It was a big fail. We still have about 400 products left in the house.</p>
+          <dl class="bn-facts caps"><div><dt>What</dt><dd>Supplement brand</dd></div><div><dt>Outcome</dt><dd>Failed</dd></div><div><dt>Still in the house</dt><dd>About 400 products</dd></div></dl>
+        </div>
+      </article>
+
+      <article class="bn-panel" data-label="Going live" data-tab="1">
+        <div>
+          <div class="bn-meta caps"><b>03</b> TikTok Live</div>
+          <h2 class="caps">$90,000 in<br>3 months</h2>
+          <p>I started going live on TikTok and made $90,000 within three months.</p>
+          <dl class="bn-facts caps"><div><dt>Platform</dt><dd>TikTok Live</dd></div><div><dt>Made</dt><dd>$90,000</dd></div><div><dt>Time</dt><dd>3 months</dd></div></dl>
+        </div>
+      </article>
+
+      <article class="bn-panel" data-label="The agency" data-tab="2">
+        <div>
+          <div class="bn-meta caps"><b>04</b> Two months later</div>
+          <h2 class="caps">1971<br>The agency</h2>
+          <p>Two months after that, I started my own TikTok Live agency and called it 1971.</p>
+          <dl class="bn-facts caps"><div><dt>What</dt><dd>TikTok Live agency</dd></div><div><dt>Name</dt><dd>1971</dd></div><div><dt>Started</dt><dd>2 months later</dd></div></dl>
+        </div>
+      </article>
+
+      <article class="bn-panel wide" data-label="Number one" data-tab="2">
+        <div>
+          <div class="bn-meta caps"><b>05</b> Within three months</div>
+          <h2 class="caps">Ranked #1<br>Globally</h2>
+          <p>Within three months, 1971 was ranked number one in the world.</p>
+          <dl class="bn-facts caps"><div><dt>Event</dt><dd>TikTok Live Fest 2026</dd></div><div><dt>1971, No. 1</dt><dd>6,216,254 points</dd></div><div><dt>No. 2</dt><dd>2,868,020 points</dd></div></dl>
+        </div>
+        <figure class="bn-shot land"><img src="img/leaderboard.png" alt="TikTok Live creator network leaderboard: 1971 is number one with 6,216,254 points" loading="lazy"></figure>
+      </article>
+
+      <article class="bn-panel wide" data-label="Apps" data-tab="3">
+        <div>
+          <div class="bn-meta caps"><b>06</b> Now</div>
+          <h2 class="caps">App<br>Founder</h2>
+          <p>My app's numbers, straight from RevenueCat.</p>
+          <dl class="bn-facts caps"><div><dt>Monthly recurring revenue</dt><dd>$69,457</dd></div><div><dt>Active subscriptions</dt><dd>15,156</dd></div><div><dt>Revenue, last 28 days</dt><dd>$120,535</dd></div></dl>
+        </div>
+        <figure class="bn-shot tall"><img src="img/revenuecat.jpg" alt="RevenueCat overview: 15,156 active subscriptions, $69,457 monthly recurring revenue, $120,535 revenue in the last 28 days" loading="lazy"></figure>
+      </article>
+    </div>
+
+    <div class="bn-tabs caps" id="bnTabs"><span>Start</span><span>Live</span><span>Agency</span><span>Now</span></div>
+  </div>
+</section>
+
+<!-- ============================== FEATURED / RIBBON -->
+<section id="featured" class="pin">
+  <div class="sticky">
+    <div class="ft-top caps">Featured proof</div>
+    <canvas id="ribbon" aria-hidden="true"></canvas>
+    <div class="ft-flat" id="ftFlat"></div>
+    <div class="ft-cap" id="ftCap"><b></b><span></span><br><i></i></div>
+    <div class="ft-bottom caps">Receipts</div>
+  </div>
+</section>
+
+<!-- ============================== WORKS -->
+<section id="works" class="pin">
+  <div class="sticky" id="wkStage">
+    <div class="wk-center caps" id="wkCenter">Works '26</div>
+    <div class="wk-name caps" id="wkName"><b></b><span></span></div>
+    <ul class="wk-list" id="wkList"></ul>
+    <div class="wk-hint">&darr; scroll down to cycle</div>
+
+    <div class="wk-card" data-name="1971" data-desc="My TikTok Live agency. Ranked #1 globally within three months."><img src="img/r-livefest.jpg" alt="" loading="lazy"><div class="chip">1971 Agency</div></div>
+    <div class="wk-card app" data-name="Wrestle AI" data-desc="On the App Store. 4.8 stars from 2,687 ratings."><img class="s s1" src="img/apps/6751189075-s0.jpg" alt="" loading="lazy"><img class="s s2" src="img/apps/6751189075-s1.jpg" alt="" loading="lazy"><img class="ic" src="img/apps/6751189075-icon.jpg" alt="" loading="lazy"><div class="chip">Wrestle AI</div></div>
+    <div class="wk-card app" data-name="Brawler" data-desc="On the App Store. 4.8 stars from 2,994 ratings."><img class="s s1" src="img/apps/6760366949-s0.jpg" alt="" loading="lazy"><img class="s s2" src="img/apps/6760366949-s1.jpg" alt="" loading="lazy"><img class="ic" src="img/apps/6760366949-icon.jpg" alt="" loading="lazy"><div class="chip">Brawler</div></div>
+    <div class="wk-card app" data-name="AbMaxx" data-desc="On the App Store. 4.7 stars from 2,420 ratings."><img class="s s1" src="img/apps/6757769125-s0.jpg" alt="" loading="lazy"><img class="s s2" src="img/apps/6757769125-s1.jpg" alt="" loading="lazy"><img class="ic" src="img/apps/6757769125-icon.jpg" alt="" loading="lazy"><div class="chip">AbMaxx</div></div>
+    <div class="wk-card" data-name="Mindroll" data-desc="Replace doomscrolling with microlearning. getmindroll.com"><img src="img/site-getmindroll.jpg" alt="" loading="lazy"><div class="chip">Mindroll</div></div>
+    <div class="wk-card" data-name="DanceMax" data-desc="Learn any dance from a video. dancemax.org"><img src="img/site-dancemax.jpg" alt="" loading="lazy"><div class="chip">DanceMax</div></div>
+  </div>
+</section>
+
+<!-- ============================== REVIEWS -->
+<section id="reviews">
+  <h2 class="caps">What users say</h2>
+  <p class="sub caps">Reviews straight from the App Store.</p>
+  <div class="rv-grid" id="rvGrid"></div>
+</section>
+
+<!-- ============================== SERVICES -->
+<section id="services">
+  <h2 class="caps">The coaching I provide</h2>
+  <p class="sub caps">It starts with a call. Booking one takes you through a short onboarding first.</p>
+  <div class="sv-list">
+    <div class="sv"><button aria-expanded="false" class="caps"><i>1</i><span>Who it's for</span><u>&#8964;</u></button>
+      <div class="body"><div><div class="in"><div><p>Young, hungry entrepreneurs who are lost.</p></div></div></div></div></div>
+    <div class="sv"><button aria-expanded="false" class="caps"><i>2</i><span>The guarantee</span><u>&#8964;</u></button>
+      <div class="body"><div><div class="in"><div><p>I guarantee you will make your money back by 100x if you follow what I say. If not, money-back guarantee.</p></div></div></div></div></div>
+    <div class="sv open"><button aria-expanded="true" class="caps"><i>3</i><span>How it starts</span><u>&#8964;</u></button>
+      <div class="body"><div><div class="in"><div><p>Book a call. You'll answer a few onboarding questions first, so I know where you are before we talk.</p>
+        <small class="caps">Step 1: onboarding &middot; Step 2: pick a call time</small></div>
+        <a class="caps" data-book href="#talk">Book a call &#8599;</a></div></div></div></div>
+  </div>
+</section>
+
+<!-- ============================== TALK -->
+<footer id="talk">
+  <div>
+    <a class="tk-link" id="tkLink" data-book href="#services" aria-label="Let's talk: book a call">
+      <h2 class="caps" id="tkTitle">Let's talk</h2>
+      <span class="tk-hint caps">Click to book a call &#8599;</span>
+    </a>
+  </div>
+  <div class="tk-foot caps"><span>&copy; 2026 Yejin Lee. All rights reserved.</span><span>Portfolio</span></div>
+</footer>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu" crossorigin="anonymous" defer></script>
+<script>
+/* ---------------------------------------------------------------- config
+   BOOK_URL: where every "Book a call" button goes. Empty = scroll to the coaching section. */
+const CONFIG = { BOOK_URL: 'onboarding.html' };
+
+const RIBBON = [
+  {src:'img/r-livefest.jpg',          t:'1971, ranked #1',        s:'TikTok Live creator network leaderboard'},
+  {src:'img/r-mrr.jpg',               t:'$69,457 MRR',            s:'My app, in RevenueCat'},
+  {src:'img/site-dancemax.jpg',  t:'DanceMax',               s:'Learn any dance from a video'},
+  {src:'img/r-chart.jpg',             t:'$120,535 in 28 days',    s:'Daily revenue, Oct 24 to Nov 21, 2026'},
+  {src:'img/site-getmindroll.jpg',   t:'Mindroll',               s:'Five minutes of ideas a day'},
+  {src:'img/r-subs.jpg',              t:'15,156 subscribers',     s:'Active subscriptions, RevenueCat'},
+  {src:'img/r-mclaren.jpg',           t:'Off the clock',          s:'Yejin Lee'},
+];
+
+(() => {
+'use strict';
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, k) => a + (b - a) * k;
+const seg = (p, a, b) => clamp((p - a) / (b - a));
+const smooth = (k) => k * k * (3 - 2 * k);
+const outC = (k) => 1 - Math.pow(1 - k, 3);
+const qs = new URLSearchParams(location.search);
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ------------------------------------------------ booking links */
+if (CONFIG.BOOK_URL) $$('[data-book]').forEach((a) => { a.href = CONFIG.BOOK_URL; });
+
+/* ------------------------------------------------ loader */
+(function loader() {
+  const el = $('#loader'), path = $('#blob');
+  let d = '';
+  for (let i = 0; i <= 240; i++) {
+    const a = (i / 240) * Math.PI * 2 - 0.5;
+    const r = 86 + 5.5 * Math.sin(a * 7 + 1) + 3.5 * Math.sin(a * 11 + 2.2) + 2 * Math.sin(a * 3);
+    d += (i ? 'L' : 'M') + (Math.cos(a) * r).toFixed(2) + ' ' + (Math.sin(a) * r).toFixed(2);
+  }
+  path.setAttribute('d', d);
+  const done = () => { el.classList.add('done'); document.body.classList.remove('loading'); };
+  if (qs.has('noload') || REDUCED) { el.style.transition = 'none'; done(); return; }
+  const len = path.getTotalLength();
+  path.style.strokeDasharray = len; path.style.strokeDashoffset = len;
+  const t0 = performance.now(), DRAW = 1500, ERASE = 600;
+  (function tick(now) {
+    const t = now - t0;
+    if (t < DRAW) path.style.strokeDashoffset = len * (1 - smooth(t / DRAW));
+    else if (t < DRAW + ERASE) { path.style.strokeDashoffset = -len * smooth((t - DRAW) / ERASE); }
+    else { path.style.opacity = 0; setTimeout(done, 260); return; }
+    requestAnimationFrame(tick);
+  })(t0);
+})();
+
+/* ------------------------------------------------ swirl painting (drawn once, original, procedural) */
+function paintSwirl() {
+  const cv = $('#swirl'); if (!cv) return;
+  const W = cv.width = Math.min(1920, Math.round(innerWidth * Math.min(devicePixelRatio, 1.5)));
+  const H = cv.height = Math.round(W * innerHeight / innerWidth);
+  const g = cv.getContext('2d');
+  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  g.fillStyle = '#0d0d10'; g.fillRect(0, 0, W, H);
+  const V = [[.12, .2, .16], [.33, .12, .1], [.56, .3, .2], [.84, .16, .15], [.72, .56, .12], [.2, .6, .17], [.94, .5, .1], [.45, .7, .12]]
+    .map(([x, y, r], i) => ({x: x * W, y: y * H, r: r * W, s: i % 2 ? 1 : -1}));
+  const ang = (x, y) => {
+    let vx = Math.cos(Math.sin(y / H * 5 + x / W * 2) * 0.6), vy = Math.sin(Math.sin(y / H * 5 + x / W * 2) * 0.6), glow = 0;
+    for (const v of V) {
+      const dx = x - v.x, dy = y - v.y, d2 = dx * dx + dy * dy, w = Math.exp(-d2 / (v.r * v.r)) * 3.2, d = Math.sqrt(d2) + 1e-3;
+      vx += (-dy / d) * w * v.s + (-dx / d) * w * 0.12; vy += (dx / d) * w * v.s + (-dy / d) * w * 0.12; glow += Math.exp(-d2 / (v.r * v.r * 0.25));
+    }
+    return [Math.atan2(vy, vx), glow];
+  };
+  g.lineCap = 'round';
+  const N = Math.round(W * H / 190);
+  for (let i = 0; i < N; i++) {
+    let x = rnd() * W, y = rnd() * H;
+    const [, gl] = ang(x, y);
+    const L = 55 + rnd() * 170 + gl * 90;
+    g.strokeStyle = `rgba(${L | 0},${L | 0},${(L + 4) | 0},${0.28 + rnd() * 0.5})`;
+    g.lineWidth = (0.6 + rnd() * 1.9) * W / 1600;
+    g.beginPath(); g.moveTo(x, y);
+    const steps = 14 + (rnd() * 26 | 0), st = W / 380;
+    for (let k = 0; k < steps; k++) { const [a] = ang(x, y); x += Math.cos(a) * st; y += Math.sin(a) * st; g.lineTo(x, y); }
+    g.stroke();
+  }
+  for (const v of V) {
+    const gr = g.createRadialGradient(v.x, v.y, 0, v.x, v.y, v.r * 0.42);
+    gr.addColorStop(0, 'rgba(255,255,255,.5)'); gr.addColorStop(0.35, 'rgba(255,255,255,.12)'); gr.addColorStop(1, 'rgba(255,255,255,0)');
+    g.fillStyle = gr; g.beginPath(); g.arc(v.x, v.y, v.r * 0.42, 0, 7); g.fill();
+  }
+  // skyline + hills in silhouette
+  g.fillStyle = '#050506'; g.beginPath(); g.moveTo(0, H);
+  let x = 0, base = H * 0.86;
+  g.lineTo(0, base);
+  while (x < W * 0.42) {
+    const w = W * (0.006 + rnd() * 0.016), h = H * (0.03 + rnd() * rnd() * 0.3) * (1 - Math.abs(x / (W * 0.42) - 0.45) * 0.9);
+    g.lineTo(x, base - h); g.lineTo(x + w * 0.5, base - h - (rnd() < 0.35 ? H * 0.05 * rnd() : 0)); g.lineTo(x + w, base - h); x += w;
+    if (rnd() < 0.3) { g.lineTo(x, base - H * 0.01); x += W * 0.004; }
+  }
+  for (let i = 0; i <= 40; i++) { const px = W * 0.42 + (W * 0.58) * i / 40; g.lineTo(px, base - H * 0.05 * Math.sin(i / 40 * 3.4 + 0.4) - H * 0.02 * Math.sin(i * 0.9)); }
+  g.lineTo(W, H); g.closePath(); g.fill();
+  const vg = g.createRadialGradient(W / 2, H / 2, H * 0.3, W / 2, H / 2, W * 0.75);
+  vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,0,.6)'); g.fillStyle = vg; g.fillRect(0, 0, W, H);
+}
+
+/* ------------------------------------------------ scroll bookkeeping */
+const pins = {};
+function measure() {
+  $$('.pin').forEach((el) => { const r = el.getBoundingClientRect(); pins[el.id] = {top: r.top + scrollY, h: el.offsetHeight}; });
+}
+const prog = (id) => { const p = pins[id]; return p ? clamp((scrollY - p.top) / Math.max(1, p.h - innerHeight)) : 0; };
+const near = (id) => { const p = pins[id]; return p && scrollY > p.top - innerHeight * 1.2 && scrollY < p.top + p.h + innerHeight * 0.2; };
+
+/* ------------------------------------------------ hero */
+const heroType = $('.hero-type'), heroMe = $('.hero-me');
+function hero() {
+  if (scrollY > innerHeight * 1.2) return;
+  heroType.style.transform = `translate3d(0,${scrollY * 0.28}px,0)`;
+  heroMe.style.transform = `translate3d(-40%,${scrollY * 0.1}px,0)`;
+}
+
+/* ------------------------------------------------ about */
+const abFig = $('.ab-fig'), abBeam = $('.ab-beam'), dust = $('#dust');
+const abA = $('.ab-word.a'), abB = $('.ab-word.b'), abOver = $('.ab-over'), abVid = $('.ab-clip video');
+const motes = Array.from({length: 70}, (_, i) => { const h = (n) => { const x = Math.sin((i + 1) * n) * 43758.5453; return x - Math.floor(x); }; return {x: h(12.9), y: h(78.2), r: 0.6 + h(3.3) * 1.6, v: 0.004 + h(9.1) * 0.012, a: 0.12 + h(5.7) * 0.4}; });
+function drawDust(light) {
+  const w = dust.clientWidth, h = dust.clientHeight, d = Math.min(devicePixelRatio, 2);
+  if (dust.width !== Math.round(w * d)) { dust.width = Math.round(w * d); dust.height = Math.round(h * d); }
+  const g = dust.getContext('2d'), t = performance.now() / 1000;
+  g.setTransform(d, 0, 0, d, 0, 0); g.clearRect(0, 0, w, h);
+  for (const m of motes) {
+    const y = ((m.y - t * m.v) % 1 + 1) % 1, x = m.x + Math.sin(t * 0.3 + m.y * 9) * 0.01;
+    g.globalAlpha = m.a * light; g.fillStyle = '#fff'; g.beginPath(); g.arc(x * w, y * h, m.r, 0, 7); g.fill();
+  }
+}
+function about() {
+  if (!near('about')) { if (!abVid.paused) abVid.pause(); return; }
+  const pre = clamp((scrollY - (pins.about.top - innerHeight)) / innerHeight);   // 0..1 while the section slides up over the hero
+  const p = prog('about');
+  // 1. the words arrive big, then open like doors
+  const split = smooth(seg(p, 0.08, 0.44)), gone = 1 - seg(p, 0.3, 0.46), inK = outC(pre);
+  abA.style.transform = `translate(-50%,-100%) translateX(${-split * 70}vw) scale(${0.86 + 0.14 * inK})`;
+  abB.style.transform = `translate(-50%,2%) translateX(${split * 70}vw) scale(${0.86 + 0.14 * inK})`;
+  abA.style.opacity = abB.style.opacity = gone * inK;
+  // 2. the spotlight comes on
+  const light = smooth(seg(p, 0.06, 0.4));
+  abBeam.style.opacity = light;
+  abBeam.style.transform = `translate3d(${(1 - light) * -8}vw,0,0)`;
+  if (!REDUCED) drawDust(0.25 + 0.75 * light);
+  // 3. the car and I rise into it
+  const fig = smooth(seg(p, 0.3, 0.62));
+  abFig.style.opacity = fig;
+  abFig.style.transform = `translate3d(0,${(1 - fig) * 9}vh,0) scale(${0.88 + 0.12 * fig})`;
+  // 4. the copy
+  const ov = smooth(seg(p, 0.6, 0.8));
+  abOver.style.opacity = ov; abOver.classList.toggle('on', ov > 0.5);
+  abOver.style.transform = `translateY(${(1 - ov) * 18}px)`;
+  if (ov > 0.3 && abVid.paused && !REDUCED) abVid.play().catch(() => {});
+  if (ov <= 0.3 && !abVid.paused) abVid.pause();
+}
+
+/* ------------------------------------------------ where I've been */
+const bnTrack = $('#bnTrack'), bnPanels = $$('.bn-panel'), bnBg = $$('.bn-bg'), bnLabel = $('#bnLabel'), bnProg = $('#bnProg'), bnTabs = $$('#bnTabs span');
+let bnX = 0, bnPrev = 0, bnV = 0;
+function been() {
+  if (!near('been')) return;
+  const p = prog('been');
+  const max = bnTrack.scrollWidth - innerWidth + innerWidth * 0.08;
+  const lead = innerWidth * 0.06;
+  bnX = lead - smooth(seg(p, 0.03, 0.97)) * (max + lead);
+  bnV = lerp(bnV, clamp((bnX - bnPrev) * 0.5, -14, 14), 0.25); bnPrev = bnX;
+  bnTrack.style.transform = `translate3d(${bnX}px,0,0)`;
+  bnTrack.style.setProperty('--v', (-bnV).toFixed(2));
+  bnBg[0].style.transform = `translate3d(${-p * innerWidth * 0.9}px,0,0)`;
+  bnBg[1].style.transform = `translate3d(${-innerWidth * 0.7 + p * innerWidth * 0.7}px,0,0)`;
+  bnProg.style.transform = `scaleX(${p})`;
+  let cur = bnPanels[0], best = 1e9;
+  bnPanels.forEach((el) => { const r = el.getBoundingClientRect(), d = Math.abs(r.left + r.width / 2 - innerWidth / 2); if (d < best) { best = d; cur = el; } });
+  if (bnLabel.textContent !== cur.dataset.label) bnLabel.textContent = cur.dataset.label;
+  bnTabs.forEach((t, i) => t.classList.toggle('on', i === +cur.dataset.tab));
+}
+
+/* ------------------------------------------------ ribbon (three.js, flat fallback) */
+const ftCap = $('#ftCap'), ftFlat = $('#ftFlat');
+let rb = null, rbOff = 0, rbCur = -1;
+function setCap(i) {
+  if (i === rbCur) return; rbCur = i;
+  ftCap.children[0].textContent = RIBBON[i].t; ftCap.children[1].textContent = RIBBON[i].s;
+  ftCap.children[3].textContent = String(i + 1).padStart(2, '0') + ' / ' + String(RIBBON.length).padStart(2, '0');
+}
+function initRibbon() {
+  const cv = $('#ribbon');
+  try {
+    if (!window.THREE) throw new Error('three.js missing');
+    const renderer = new THREE.WebGLRenderer({canvas: cv, alpha: true, antialias: true});
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.outputEncoding = THREE.sRGBEncoding;
+    const scene = new THREE.Scene(), cam = new THREE.PerspectiveCamera(32, 1, 0.1, 50); cam.position.set(0, 0, 7.2);
+    const CW = 2.7, CH = CW * 9 / 16, GAP = 0.16, STEP = CW + GAP, L = STEP * RIBBON.length;
+    const loader = new THREE.TextureLoader();
+    const cards = RIBBON.map((r, i) => {
+      const geo = new THREE.PlaneGeometry(CW, CH, 48, 1);
+      const tex = loader.load(r.src, () => { rb && (rb.dirty = true); }); tex.encoding = THREE.sRGBEncoding; tex.anisotropy = 8;
+      const mesh = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({map: tex, side: THREE.DoubleSide}));
+      mesh.frustumCulled = false; scene.add(mesh);
+      return {mesh, geo, base: Float32Array.from(geo.attributes.position.array), i};
+    });
+    const size = () => {
+      const w = cv.clientWidth, h = cv.clientHeight, asp = w / h, tan = Math.tan(16 * Math.PI / 180);
+      renderer.setSize(w, h, false); cam.aspect = asp;
+      // keep about the same number of cards across the screen at any shape
+      const halfW = lerp(1.75, 3.5, clamp((asp - 0.5) / 0.9)), dist = Math.max(halfW / (tan * asp), 7.2);
+      cam.position.z = dist; cam.far = dist + 30; cam.updateProjectionMatrix();
+      ftCap.style.top = Math.round(h / 2 + (CH / 2) / (tan * dist) * (h / 2) + 22) + 'px';
+    };
+    size(); addEventListener('resize', size);
+    rb = {dirty: true, render(off, grow) {
+      let bestD = 1e9, best = 0;
+      for (const c of cards) {
+        let cx = ((c.i * STEP + off) % L + L) % L; if (cx > L / 2) cx -= L;
+        if (Math.abs(cx) < bestD) { bestD = Math.abs(cx); best = c.i; }
+        const pos = c.geo.attributes.position.array, b = c.base;
+        for (let k = 0; k < pos.length; k += 3) {
+          const u = cx + b[k], uc = clamp(u, -4.6, 4.6);
+          pos[k] = u * (1 - 0.012 * uc * uc);                 // sides pull in as they bend
+          pos[k + 1] = b[k + 1] * (1 + 0.012 * uc * uc) + 0.021 * uc * uc * uc;  // left dips, right lifts
+          pos[k + 2] = 0.2 * uc * uc;                         // both ends swing toward the camera
+        }
+        c.geo.attributes.position.needsUpdate = true;
+      }
+      scene.scale.setScalar(lerp(0.34, 1, grow));
+      renderer.render(scene, cam); setCap(best);
+    }};
+  } catch (e) {
+    console.warn('Ribbon: using flat fallback.', e.message);
+    document.body.classList.add('noweb');
+    ftFlat.innerHTML = RIBBON.concat(RIBBON).map((r) => `<img src="${r.src}" alt="${r.t}" loading="lazy">`).join('');
+  }
+}
+function featured() {
+  if (!near('featured')) return;
+  const p = prog('featured');
+  const pre = clamp((scrollY - (pins.featured.top - innerHeight * 0.7)) / (innerHeight * 0.7));
+  const target = -p * (2.86 * (RIBBON.length - 1));
+  rbOff = lerp(rbOff, target, 0.14);
+  ftCap.style.opacity = smooth(seg(pre, 0.7, 1));
+  if (rb) rb.render(rbOff, outC(pre));
+  else {
+    const w = ftFlat.firstChild ? ftFlat.firstChild.offsetWidth + 18 : 0;
+    ftFlat.style.transform = `translate3d(${innerWidth / 2 - w / 2 - p * w * (RIBBON.length - 1)}px,-50%,0)`;
+    setCap(Math.round(p * (RIBBON.length - 1)));
+  }
+}
+
+/* ------------------------------------------------ works: hexagon ring -> vertical carousel */
+const wkStage = $('#wkStage'), wkCards = $$('.wk-card'), wkCenter = $('#wkCenter'), wkName = $('#wkName'), wkList = $('#wkList'), wkHint = $('.wk-hint');
+wkList.innerHTML = wkCards.map((c) => `<li>${c.dataset.name}</li>`).join('');
+const wkItems = $$('li', wkList); let wkCur = -1;
+function works() {
+  if (!near('works')) return;
+  const p = prog('works'), n = wkCards.length, vw = innerWidth, vh = innerHeight, phone = vw < 760;
+  const R = Math.min(vw * (phone ? 0.31 : 0.2), vh * (phone ? 0.24 : 0.32));
+  const cw = R * 0.92;
+  wkStage.style.setProperty('--cw', cw.toFixed(1) + 'px');
+  const pre = clamp((scrollY - (pins.works.top - vh * 0.6)) / (vh * 0.6));
+  const k = smooth(seg(p, 0.2, 0.36));                 // 0 = ring, 1 = carousel
+  const idx = seg(p, 0.36, 0.97) * (n - 1);
+  const spin = (p * 150 - (1 - outC(pre)) * 90) * Math.PI / 180;
+  const bigS = phone ? 2.5 : 2.0, gapY = cw * 0.625 * bigS * 1.12;
+  wkCards.forEach((el, i) => {
+    const th = i / n * Math.PI * 2 + spin;
+    const rx0 = Math.sin(th) * R * 1.02, ry0 = -Math.cos(th) * R * 1.02, rz0 = th * 180 / Math.PI;
+    // unfurl: cards leave the ring one after another
+    const ki = smooth(clamp(k * 1.6 - (i / n) * 0.6));
+    const d = i - idx, ad = Math.abs(d);
+    const cy = d * gapY, crx = clamp(-d * 52, -78, 78), cs = bigS - Math.min(ad, 1) * (bigS - 1.02);
+    const x = lerp(rx0, 0, ki), y = lerp(ry0, cy, ki), rz = lerp(rz0 % 360, 0, ki), rxx = lerp(0, crx, ki), s = lerp(lerp(0.5, 1, outC(pre)), cs, ki);
+    const op = lerp(outC(pre), clamp(1.7 - ad), ki);
+    el.style.transform = `translate(-50%,-50%) translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,${(-ad * 60 * ki).toFixed(1)}px) rotateZ(${rz.toFixed(2)}deg) rotateX(${rxx.toFixed(2)}deg) scale(${s.toFixed(3)})`;
+    el.style.opacity = op.toFixed(3); el.style.zIndex = String(100 - Math.round(ad * 10));
+  });
+  wkCenter.style.opacity = (1 - seg(k, 0.1, 0.7)) * outC(pre);
+  wkHint.style.opacity = seg(k, 0.6, 1) * 0.9;
+  const cur = k > 0.5 ? Math.round(idx) : -1;
+  wkName.style.opacity = seg(k, 0.7, 1);
+  if (cur !== wkCur) {
+    wkCur = cur;
+    wkItems.forEach((li, i) => li.classList.toggle('on', i === cur));
+    if (cur >= 0) { wkName.children[0].textContent = wkCards[cur].dataset.name; wkName.children[1].textContent = wkCards[cur].dataset.desc; }
+  }
+}
+
+/* ------------------------------------------------ App Store reviews (loaded live from Apple's public feed) */
+const APPS = [
+  {id: '6751189075', name: 'Wrestle AI', rating: '4.8', count: '2,687', url: 'https://apps.apple.com/us/app/wrestle-ai/id6751189075'},
+  {id: '6760366949', name: 'Brawler',    rating: '4.8', count: '2,994', url: 'https://apps.apple.com/us/app/brawler-future-of-boxing/id6760366949'},
+  {id: '6757769125', name: 'AbMaxx',     rating: '4.7', count: '2,420', url: 'https://apps.apple.com/us/app/abmaxx-become-shredded/id6757769125'},
+];
+(function reviews() {
+  const grid = $('#rvGrid'); if (!grid) return;
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+  APPS.forEach((app) => {
+    const card = el('article', 'rv-app'), head = el('div', 'rv-head'), ic = el('img');
+    ic.src = `img/apps/${app.id}-icon.jpg`; ic.alt = ''; ic.loading = 'lazy';
+    const meta = el('div'); meta.append(el('b', '', app.name));
+    const line = el('span'); line.append(el('i', '', `${app.rating} \u2605`), ` \u00b7 ${app.count} ratings`); meta.append(line);
+    head.append(ic, meta);
+    const list = el('div', 'rv-list'), link = el('a', 'caps', 'Read them on the App Store \u2197');
+    link.href = app.url; link.target = '_blank'; link.rel = 'noopener';
+    card.append(head, list, link); grid.append(card);
+    fetch(`https://itunes.apple.com/us/rss/customerreviews/id=${app.id}/sortBy=mostHelpful/json`)
+      .then((r) => r.json())
+      .then((d) => {
+        const all = (d.feed && d.feed.entry) || [];
+        const pick = all.filter((e) => e['im:rating'] && e['im:rating'].label === '5' && e.content && e.content.label.length > 30 && e.content.label.length < 240).slice(0, 3);
+        pick.forEach((e) => {
+          const it = el('div', 'rv-item');
+          it.append(el('div', 'st', '\u2605\u2605\u2605\u2605\u2605'), el('h3', '', e.title.label), el('p', '', e.content.label), el('small', '', e.author.name.label));
+          list.append(it);
+        });
+        measure();
+      })
+      .catch(() => {});   // offline or blocked: the rating and the App Store link still show
+  });
+})();
+
+/* ------------------------------------------------ services accordion */
+$$('.sv button').forEach((b) => b.addEventListener('click', () => {
+  const me = b.parentElement, open = me.classList.contains('open');
+  $$('.sv').forEach((s) => { s.classList.remove('open'); $('button', s).setAttribute('aria-expanded', 'false'); });
+  if (!open) { me.classList.add('open'); b.setAttribute('aria-expanded', 'true'); }
+}));
+
+/* ------------------------------------------------ talk */
+const tkTitle = $('#tkTitle'), talkEl = $('#talk');
+function talk() {
+  const r = talkEl.getBoundingClientRect(); if (r.top > innerHeight) return;
+  const k = outC(clamp((innerHeight - r.top) / (innerHeight * 0.85)));
+  tkTitle.style.transform = `translate3d(0,${(1 - k) * 70}px,0) scale(${0.9 + 0.1 * k})`;
+  tkTitle.style.opacity = k; tkTitle.style.filter = k < 1 ? `blur(${(1 - k) * 10}px)` : 'none';
+}
+
+const tkLink = $('#tkLink');
+tkLink.addEventListener('pointermove', (e) => {
+  const r = tkTitle.getBoundingClientRect();
+  tkLink.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+  tkLink.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
+});
+
+/* ------------------------------------------------ loop */
+function frame() { hero(); about(); been(); featured(); works(); talk(); requestAnimationFrame(frame); }
+function boot() {
+  paintSwirl(); measure(); initRibbon();
+  // ?at=works:0.5 jumps to a point inside a pinned section (used for checking the page)
+  const at = qs.get('at');
+  if (at) { const [id, v] = at.split(':'); const s = pins[id]; if (s) scrollTo(0, s.top + (s.h - innerHeight) * parseFloat(v || '0')); else { const el = document.getElementById(id); el && el.scrollIntoView(); } rbOff = -prog('featured') * (2.86 * (RIBBON.length - 1)); }
+  requestAnimationFrame(frame);
+}
+let rz, lastW = innerWidth;
+addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => {
+  // phones fire resize whenever the address bar moves: only repaint the painting when the width changes
+  if (innerWidth !== lastW) { lastW = innerWidth; paintSwirl(); }
+  measure(); }, 180); });
+addEventListener('load', () => { measure(); });
+if (document.readyState === 'complete') boot(); else addEventListener('load', boot);
+})();
+</script>
+</body>
+</html>

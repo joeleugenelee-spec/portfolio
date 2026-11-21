@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Book a call with Yejin Lee</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0b0b0e">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--night:#0b0b0e;--paper:#ecebe7;--line:rgba(255,255,255,.16);--mute:rgba(255,255,255,.58);--ease:cubic-bezier(.23,1,.32,1);
+  --sans:"Outfit","Helvetica Neue",Arial,sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--night)}
+body{font-family:var(--sans);color:#fff;background:var(--night);min-height:100vh;min-height:100svh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+[hidden]{display:none!important}
+.caps{text-transform:uppercase;letter-spacing:.08em}
+/* stage: the same spotlight as the portfolio's About panel */
+.stage{position:fixed;inset:0;pointer-events:none;overflow:hidden;background:
+  linear-gradient(112deg,transparent 34%,rgba(255,255,255,.12) 49%,rgba(255,255,255,.03) 58%,transparent 68%),
+  radial-gradient(60% 70% at 70% 40%,rgba(255,255,255,.07),transparent 70%),var(--night)}
+.stage::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 50%,transparent 55%,rgba(0,0,0,.7))}
+.big{position:absolute;right:-2vw;bottom:-7vw;font-weight:700;font-size:clamp(200px,44vw,760px);line-height:.8;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.11);user-select:none;transition:opacity .4s var(--ease)}
+.car{position:absolute;right:3vw;bottom:5vh;width:min(46vw,640px);opacity:0;transform:translateY(20px) scale(.96);transition:opacity .9s var(--ease),transform .9s var(--ease);filter:drop-shadow(0 40px 60px rgba(0,0,0,.7))}
+.is-done .car{opacity:.92;transform:none}
+.is-done .big{opacity:0}
+.nav{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:22px clamp(18px,3.2vw,44px);font-size:11px;font-weight:500}
+.nav .logo{font-weight:700;font-size:15px;letter-spacing:.22em}
+.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.55);border-radius:99px;padding:9px 16px;font-size:10.5px;font-weight:600;cursor:pointer;background:none;color:#fff;font-family:inherit;transition:transform .16s var(--ease),background .2s,color .2s,border-color .2s}
+.pill.fill{background:#fff;color:#0b0b0e;border-color:#fff;padding:14px 26px;font-size:11.5px}
+.pill.ghost{padding:14px 22px;font-size:11.5px;border-color:rgba(255,255,255,.3)}
+.pill:active{transform:scale(.97)}
+.pill:focus-visible,.choice:focus-within{outline:2px solid #fff;outline-offset:3px}
+@media (hover:hover) and (pointer:fine){.pill:hover{background:#fff;color:#0b0b0e;border-color:#fff}.pill.fill:hover{background:var(--paper)}}
+main{position:relative;z-index:1;padding:clamp(18px,6vh,70px) clamp(18px,3.2vw,44px) 60px}
+.ob{max-width:780px}
+.ob__top{display:flex;align-items:center;gap:18px;margin-bottom:clamp(26px,6vh,60px)}
+.ob__bar{flex:1;max-width:260px;height:2px;background:rgba(255,255,255,.16)}
+.ob__fill{height:100%;background:#fff;transform-origin:0 50%;transform:scaleX(var(--p,0));transition:transform .5s var(--ease)}
+.ob__count{font-family:var(--mono);font-size:10.5px;color:var(--mute);letter-spacing:.06em;text-transform:uppercase}
+fieldset{border:0;min-width:0}
+.ob__step{opacity:0;transform:translateY(18px);filter:blur(8px)}
+.ob__step.is-in{opacity:1;transform:none;filter:none;transition:opacity .5s var(--ease),transform .5s var(--ease),filter .5s var(--ease)}
+legend,.ob__title{display:block;font-weight:700;font-size:clamp(34px,6vw,84px);line-height:.94;letter-spacing:-.035em;text-transform:uppercase;max-width:14ch;outline:none}
+.ob__hint{margin-top:16px;font-size:clamp(14px,1.25vw,17px);color:var(--mute);max-width:46ch;line-height:1.5}
+.choices{margin-top:clamp(22px,4.5vh,40px);display:grid;gap:10px;max-width:560px;counter-reset:c}
+.choice{position:relative;display:flex;align-items:center;gap:16px;border:1px solid var(--line);border-radius:16px;padding:17px 20px;font-size:clamp(15px,1.3vw,18px);font-weight:500;cursor:pointer;
+  background:rgba(255,255,255,.03);transition:background .25s var(--ease),color .25s var(--ease),border-color .25s,transform .25s var(--ease)}
+.choice input{position:absolute;opacity:0;pointer-events:none}
+.choice__dot{flex:none;width:28px;height:28px;border-radius:8px;border:1px solid rgba(255,255,255,.35);display:grid;place-items:center;font-family:var(--mono);font-size:11px;color:var(--mute);transition:inherit}
+.choice__dot::before{counter-increment:c;content:counter(c,upper-alpha)}
+.choice:has(input:checked){background:#fff;color:#0b0b0e;border-color:#fff}
+.choice:has(input:checked) .choice__dot{background:#0b0b0e;color:#fff;border-color:#0b0b0e}
+.choice:active{transform:scale(.985)}
+@media (hover:hover) and (pointer:fine){.choice:hover{border-color:rgba(255,255,255,.6);transform:translateX(6px)}.choice:has(input:checked):hover{transform:none}}
+.lbl{display:block;margin-top:clamp(22px,4vh,34px);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+input[type=text],input[type=email],textarea{display:block;width:100%;max-width:560px;margin-top:8px;background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.3);color:#fff;font:500 clamp(18px,1.8vw,26px)/1.35 var(--sans);padding:10px 0;border-radius:0;outline:none;transition:border-color .2s}
+textarea{min-height:130px;resize:vertical}
+input::placeholder{color:rgba(255,255,255,.3)}
+input:focus,textarea:focus{border-bottom-color:#fff}
+[aria-invalid=true]{border-bottom-color:#ff6b6b!important}
+.ob__err{margin-top:12px;font-size:13px;color:#ff8a8a}
+.ob__nav{margin-top:clamp(26px,5vh,46px);display:flex;gap:10px}
+.offer{margin-top:clamp(22px,4vh,36px);max-width:560px;border:1px solid var(--line);border-radius:20px;padding:24px;background:rgba(12,12,16,.72);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.offer{background:var(--paper);color:#17171a;border-color:var(--paper);-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.offer .rows li{border-top-color:rgba(0,0,0,.12)}.offer .rows__name{color:#4a4a4f}
+.offer__k{font-size:10px;font-weight:700;color:#77777b;margin-bottom:10px}
+.offer.upsell{background:rgba(12,12,16,.78);color:#fff;border-color:rgba(255,255,255,.4);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.offer.upsell .rows li{border-top-color:var(--line)}.offer.upsell .rows__name{color:rgba(255,255,255,.7)}.offer.upsell .offer__k{color:rgba(255,255,255,.6)}
+.up-btns{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+.offer .note{margin-top:14px;color:inherit;opacity:.8}
+.offer__g{font-size:clamp(18px,1.8vw,25px);font-weight:600;line-height:1.25;letter-spacing:-.01em}
+.rows{list-style:none;margin-top:18px}
+.rows li{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid var(--line);font-size:14px}
+.rows__name{color:rgba(255,255,255,.75)}.rows__value{font-family:var(--mono);font-size:12px}
+.btn-row{margin-top:22px}
+.note{margin-top:16px;font-size:13px;color:var(--mute);max-width:46ch;line-height:1.5}
+@media (max-width:760px){.big{font-size:70vw;bottom:auto;top:8vh;right:-6vw}.car{width:86vw;right:7vw;bottom:2vh;opacity:0!important}}
+@media (prefers-reduced-motion:reduce){.ob__step,.ob__step.is-in,.car,.ob__fill{transition:none;filter:none;transform:none}}
+</style>
+</head>
+<body>
+<div class="stage" aria-hidden="true"><div class="big" id="ob-big">01</div><img class="car" src="img/mclaren-cut.png" alt=""></div>
+
+<header class="nav caps">
+  <a class="logo" href="index.html">YEJIN&bull;</a>
+  <a class="pill" href="index.html#services">&larr; Back to the portfolio</a>
+</header>
+
+<main id="intake">
+    <form class="ob" id="ob" novalidate>
+      <div class="ob__top"><div class="ob__bar" aria-hidden="true"><div class="ob__fill" id="ob-fill"></div></div>
+      <p class="ob__count" id="ob-count" aria-live="polite">Question 1 of 6</p></div>
+      <fieldset class="ob__step" data-step="role" data-required>
+        <legend>What do you do right now?</legend>
+        <p class="ob__hint">Pick the closest one.</p>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="role" value="Creator"><span class="choice__dot"></span>I'm a creator</label>
+          <label class="choice"><input type="radio" name="role" value="App founder"><span class="choice__dot"></span>I'm building an app</label>
+          <label class="choice"><input type="radio" name="role" value="Agency or manager"><span class="choice__dot"></span>I run or work at an agency</label>
+          <label class="choice"><input type="radio" name="role" value="Something else"><span class="choice__dot"></span>Something else</label>
+        </div>
+        <p class="ob__err" hidden>Pick one to keep going.</p>
+      </fieldset>
+
+      <fieldset class="ob__step" data-step="revenue" data-required hidden>
+        <legend>What do you make a month from it?</legend>
+        <p class="ob__hint">A rough number is fine. Nobody sees this but me.</p>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="revenue" value="Nothing yet" data-score="1"><span class="choice__dot"></span>Nothing yet</label>
+          <label class="choice"><input type="radio" name="revenue" value="Under $1,000" data-score="2"><span class="choice__dot"></span>Under $1,000</label>
+          <label class="choice"><input type="radio" name="revenue" value="$1,000 to $5,000" data-score="3"><span class="choice__dot"></span>$1,000 to $5,000</label>
+          <label class="choice"><input type="radio" name="revenue" value="Over $5,000" data-score="3"><span class="choice__dot"></span>Over $5,000</label>
+        </div>
+        <p class="ob__err" hidden>Pick one to keep going.</p>
+      </fieldset>
+
+      <fieldset class="ob__step" data-step="blocker" data-required hidden>
+        <legend>What's stopping your next $10,000?</legend>
+        <p class="ob__hint">Say it the way you'd say it to a friend. Two or three sentences.</p>
+        <label class="lbl" for="f-blocker">What's in the way</label>
+        <textarea id="f-blocker" name="blocker" aria-describedby="f-blocker-err"></textarea>
+        <p class="ob__err" id="f-blocker-err" hidden>Write a sentence or two about what's in the way.</p>
+      </fieldset>
+
+      <fieldset class="ob__step" data-step="hours" data-required hidden>
+        <legend>How many hours a week can you put in?</legend>
+        <p class="ob__hint">The calls are one hour each. The work in between is on you.</p>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="hours" value="Under 5" data-score="0"><span class="choice__dot"></span>Under 5 hours</label>
+          <label class="choice"><input type="radio" name="hours" value="5 to 10" data-score="1"><span class="choice__dot"></span>5 to 10 hours</label>
+          <label class="choice"><input type="radio" name="hours" value="10 to 20" data-score="2"><span class="choice__dot"></span>10 to 20 hours</label>
+          <label class="choice"><input type="radio" name="hours" value="Over 20" data-score="2"><span class="choice__dot"></span>Over 20 hours</label>
+        </div>
+        <p class="ob__err" hidden>Pick one to keep going.</p>
+      </fieldset>
+
+      <fieldset class="ob__step" data-step="ready" data-required hidden>
+        <legend>Coaching is $250. Are you in?</legend>
+        <p class="ob__hint">Five one-hour calls, consistent check-ins, and 24-hour access to my phone text line.</p>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="ready" value="Ready now" data-score="3"><span class="choice__dot"></span>Yes, I'm ready to start</label>
+          <label class="choice"><input type="radio" name="ready" value="Within a month" data-score="1"><span class="choice__dot"></span>Yes, within the next month</label>
+          <label class="choice"><input type="radio" name="ready" value="Not yet" data-score="0"><span class="choice__dot"></span>Not yet, I want to talk first</label>
+        </div>
+        <p class="ob__err" hidden>Pick one to keep going.</p>
+      </fieldset>
+
+      <fieldset class="ob__step" data-step="contact" hidden>
+        <legend>Where do I reach you?</legend>
+        <p class="ob__hint">I read every answer before the call.</p>
+        <div><label class="lbl" for="f-name">Name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" aria-describedby="f-name-err">
+          <p class="ob__err" id="f-name-err" hidden>Write your name.</p></div>
+        <div><label class="lbl" for="f-email">Email</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" aria-describedby="f-email-err">
+          <p class="ob__err" id="f-email-err" hidden>Write an email address with an @, like name@gmail.com.</p></div>
+        <div><label class="lbl" for="f-phone">Phone number</label>
+          <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" aria-describedby="f-phone-err">
+          <p class="ob__err" id="f-phone-err" hidden>Write a phone number I can text, with at least 7 digits.</p></div>
+        <div><label class="lbl" for="f-handle">Your main account (optional)</label>
+          <input id="f-handle" name="handle" type="text" autocomplete="off" placeholder="@yourname"></div>
+      </fieldset>
+
+      <section class="ob__step" data-step="done" hidden aria-labelledby="done-h">
+        <h1 class="ob__title" id="done-h" tabindex="-1">You're a fit. Pick your first call.</h1>
+        <p class="ob__hint" id="done-line">Here's what the month looks like.</p>
+        <div class="offer">
+          <p class="offer__k caps">The package</p>
+          <p class="offer__g">I guarantee you will make your money back by 100x if you follow what I say. If not, money-back guarantee.</p>
+          <ul class="rows">
+            <li><span class="rows__name">Five calls, one hour each</span><span class="rows__value">5 hours</span></li>
+            <li><span class="rows__name">Consistent check-ins</span><span class="rows__value">All month</span></li>
+            <li><span class="rows__name">My phone text line</span><span class="rows__value">24 hours</span></li>
+            <li><span class="rows__name">Price</span><span class="rows__value">$250</span></li>
+          </ul>
+        </div>
+        <div class="offer upsell" id="upsell" hidden>
+          <p class="offer__k caps">One step up, for you</p>
+          <p class="offer__g">Want me closer? I'll be your advisor for the month.</p>
+          <ul class="rows">
+            <li><span class="rows__name">Calls</span><span class="rows__value">3 a week, all month</span></li>
+            <li><span class="rows__name">My role</span><span class="rows__value">Your advisor</span></li>
+            <li><span class="rows__name">Like a coach</span><span class="rows__value">I keep you on top of everything</span></li>
+            <li><span class="rows__name">Price</span><span class="rows__value">$500</span></li>
+          </ul>
+          <div class="up-btns"><button class="pill fill caps" type="button" id="up-yes">I want the $500 package</button><button class="pill ghost caps" type="button" id="up-no">Keep the $250</button></div>
+          <p class="note" id="up-note" hidden></p>
+        </div>
+        <div class="btn-row"><a class="pill fill caps" id="book-link" href="#">Pick a call time<span aria-hidden="true">&#8599;</span></a></div>
+        <p class="note" id="done-note">Your answers go with the booking, so the first call starts on your numbers.</p>
+      </section>
+
+      <div class="ob__nav" id="ob-nav">
+        <button class="pill ghost caps" type="button" id="ob-back" hidden>Back</button>
+        <button class="pill fill caps" type="submit" id="ob-next">Next</button>
+      </div>
+    </form>
+</main>
+
+<script>
+/* ---- Backend settings ------------------------------------------------------------------
+   supabaseUrl / supabaseAnonKey: the project that stores leads (run supabase/schema.sql in it first).
+                    The anon key is meant to be public; the table only accepts inserts.
+   bookingUrl:      your scheduling link (Cal.com or Calendly). Answers are added as name, email, notes.
+   notifyEndpoint:  optional. A FormSubmit alias URL (https://formsubmit.co/ajax/<random-string>) that
+                    emails you each lead. Use the random alias, not your email, so it stays private.
+   instagram:       where people are sent while no backend or booking link is connected. */
+const CONFIG = {
+  supabaseUrl: '',
+  supabaseAnonKey: '',
+  bookingUrl: '',
+  notifyEndpoint: '',
+  instagram: 'https://instagram.com/joelnols'
+};
+const HAS_DB = !!(CONFIG.supabaseUrl && CONFIG.supabaseAnonKey);
+function save(table, row) {
+  if (!HAS_DB) return Promise.resolve(false);
+  return fetch(`${CONFIG.supabaseUrl.replace(/\/$/, '')}/rest/v1/${table}`, {
+    method: 'POST', keepalive: true,
+    headers: { 'Content-Type': 'application/json', apikey: CONFIG.supabaseAnonKey, Authorization: `Bearer ${CONFIG.supabaseAnonKey}`, Prefer: 'return=minimal' },
+    body: JSON.stringify(row)
+  }).then((r) => r.ok).catch(() => false);
+}
+function notify(subject, data) {
+  if (!CONFIG.notifyEndpoint) return;
+  fetch(CONFIG.notifyEndpoint, { method: 'POST', keepalive: true, headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify({ _subject: subject, _template: 'table', _captcha: 'false', ...data }) }).catch(() => {});
+}
+
+(() => {
+  const form = document.getElementById('ob');
+  const steps = [...form.querySelectorAll('.ob__step')];
+  const qCount = steps.length - 1;            // the last step is the result
+  const fill = document.getElementById('ob-fill');
+  const count = document.getElementById('ob-count');
+  const back = document.getElementById('ob-back');
+  const next = document.getElementById('ob-next');
+  const nav = document.getElementById('ob-nav');
+  let i = 0, started = false;
+
+  function show(n) {
+    steps[i].hidden = true; steps[i].classList.remove('is-in');
+    i = n;
+    const s = steps[i];
+    s.hidden = false; void s.offsetWidth; s.classList.add('is-in');
+    const done = s.dataset.step === 'done';
+    fill.style.setProperty('--p', done ? 1 : i / qCount);
+    count.textContent = done ? 'All set' : `Question ${i + 1} of ${qCount}`;
+    document.getElementById('ob-big').textContent = done ? 'GO' : String(i + 1).padStart(2, '0');
+    document.body.classList.toggle('is-done', done);
+    back.hidden = i === 0 || done;
+    nav.hidden = done;
+    next.textContent = i === qCount - 1 ? 'See my plan' : 'Next';
+    const focusEl = done ? s.querySelector('#done-h') : s.querySelector('input:checked, input, textarea');
+    if (focusEl && started) focusEl.focus({ preventScroll: true });
+    if (started) window.scrollTo(0, 0);
+    started = true;
+  }
+
+  function check(s) {
+    let ok = true;
+    const errs = s.querySelectorAll('.ob__err');
+    errs.forEach(e => e.hidden = true);
+    s.querySelectorAll('[aria-invalid]').forEach(e => e.removeAttribute('aria-invalid'));
+    const fail = (el, err) => { ok = false; if (err) err.hidden = false; if (el) el.setAttribute('aria-invalid', 'true'); };
+    if (s.querySelector('input[type="radio"]') && !s.querySelector('input:checked')) fail(null, errs[0]);
+    const ta = s.querySelector('textarea');
+    if (ta && ta.value.trim().length < 8) fail(ta, document.getElementById('f-blocker-err'));
+    if (s.dataset.step === 'contact') {
+      const n = form.elements.name, e = form.elements.email;
+      if (!n.value.trim()) fail(n, document.getElementById('f-name-err'));
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.value.trim())) fail(e, document.getElementById('f-email-err'));
+      const ph = form.elements.phone;
+      if (ph.value.replace(/\D/g, '').length < 7) fail(ph, document.getElementById('f-phone-err'));
+    }
+    if (!ok) { const first = s.querySelector('[aria-invalid="true"]') || s.querySelector('input'); first && first.focus(); }
+    return ok;
+  }
+
+  function answers() {
+    const f = form.elements;
+    const val = name => (form.querySelector(`input[name="${name}"]:checked`) || {}).value || '';
+    const score = ['revenue', 'hours', 'ready'].reduce((t, n) => t + Number((form.querySelector(`input[name="${n}"]:checked`) || { dataset: { score: 0 } }).dataset.score), 0);
+    return {
+      name: f.name.value.trim(), email: f.email.value.trim(), phone: f.phone.value.trim(), handle: f.handle.value.trim(),
+      role: val('role'), revenue: val('revenue'), blocker: f.blocker.value.trim(),
+      hours: val('hours'), ready: val('ready'),
+      score, tier: score >= 6 ? 'hot' : score >= 3 ? 'warm' : 'cold',
+      submittedAt: new Date().toISOString(), page: location.href
+    };
+  }
+
+  function finish() {
+    const a = answers();
+    const leadId = (crypto.randomUUID ? crypto.randomUUID() : 'xxxxxxxx-xxxx-4xxx-8xxx-xxxxxxxxxxxx'.replace(/x/g, () => (Math.random() * 16 | 0).toString(16)));
+    const notes = `Role: ${a.role}\nMonthly: ${a.revenue}\nHours/week: ${a.hours}\nReady for $250: ${a.ready}\nPhone: ${a.phone}\nHandle: ${a.handle || '-'}\nBlocker: ${a.blocker}\nLead: ${a.tier} (${a.score}/8)`;
+    save('leads', { id: leadId, name: a.name, email: a.email, phone: a.phone, handle: a.handle || null, role: a.role, revenue: a.revenue,
+      blocker: a.blocker, hours: a.hours, ready: a.ready, score: a.score, tier: a.tier, page: a.page.slice(0, 300) });
+    notify(`New ${a.tier} lead: ${a.name}`, a);
+    const link = document.getElementById('book-link'), h = document.getElementById('done-h'), note = document.getElementById('done-note');
+    if (CONFIG.bookingUrl) {
+      const u = new URL(CONFIG.bookingUrl);
+      u.searchParams.set('name', a.name); u.searchParams.set('email', a.email); u.searchParams.set('notes', notes);
+      link.href = u.toString();
+    } else if (HAS_DB || CONFIG.notifyEndpoint) {
+      // no scheduler yet: the answers are saved, so Yejin replies with a time
+      link.closest('.btn-row').hidden = true;
+      h.textContent = 'You\u2019re a fit. I\u2019ll be in touch.';
+      note.textContent = `Your answers are with me. I'll text or email you at ${a.email} to set a time for your first call.`;
+    } else {
+      // nothing connected yet: send them to Instagram so the lead isn't lost
+      link.href = CONFIG.instagram; link.target = '_blank'; link.rel = 'noopener';
+      link.firstChild.textContent = 'DM me on Instagram';
+      h.textContent = 'You\u2019re a fit. DM me to lock in your call.';
+      note.textContent = 'Send me a DM and I\u2019ll set up your first call.';
+    }
+    if (a.ready === 'Not yet') {
+      h.textContent = 'Thanks. Let\u2019s talk it through first.';
+      document.getElementById('done-line').textContent = 'We\u2019ll talk first and see if it makes sense for you before you pay anything.';
+    }
+    // very hot leads (top score and ready to start now) are offered the $500 advisor package
+    if (a.tier === 'hot' && a.ready === 'Ready now') {
+      const up = document.getElementById('upsell'), upNote = document.getElementById('up-note');
+      up.hidden = false;
+      const choose = (pkg, msg) => {
+        up.querySelector('.up-btns').hidden = true; upNote.hidden = false; upNote.textContent = msg;
+        save('lead_packages', { lead_id: leadId, package: pkg });
+        notify(`${a.name} picked the ${pkg} package`, { package: pkg, name: a.name, email: a.email, phone: a.phone });
+        if (CONFIG.bookingUrl) { const u = new URL(link.href); u.searchParams.set('notes', notes + `\nPackage: ${pkg}`); link.href = u.toString(); }
+      };
+      document.getElementById('up-yes').onclick = () => choose('$500 advisor', "Locked in. I'll set you up on the $500 advisor package: three calls a week for the month.");
+      document.getElementById('up-no').onclick = () => choose('$250 coaching', "No problem. You're on the $250 package.");
+    }
+    show(steps.length - 1);
+  }
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (!check(steps[i])) return;
+    if (i === qCount - 1) finish(); else show(i + 1);
+  });
+  back.addEventListener('click', () => show(i - 1));
+  /* picking an option moves on by itself after a beat, so the intake feels quick */
+  form.addEventListener('change', e => {
+    if (e.target.type !== 'radio') return;
+    steps[i].querySelectorAll('.ob__err').forEach(x => x.hidden = true);
+    const at = i;
+    setTimeout(() => { if (i === at && i < qCount - 1) show(i + 1); }, 260);
+  });
+  show(0);
+})();
+</script>
+</body>
+</html>
