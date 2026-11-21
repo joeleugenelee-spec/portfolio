@@ -49,7 +49,8 @@ img,video,canvas{display:block}
 .hero-type{position:absolute;left:0;right:0;top:15vh;text-align:center;font-weight:700;font-size:clamp(54px,12.4vw,250px);line-height:.8;letter-spacing:-.045em;white-space:nowrap;will-change:transform}
 .hero-type span{display:block}
 .hero-type a{display:block;cursor:pointer}
-.hero-type .l1{word-spacing:.14em}.hero-type .l2{word-spacing:.82em;position:relative;left:-2.2vw}
+.hero-type .l1,.hero-type .l2{position:relative;left:-2.2vw}
+.hero-type .l1{word-spacing:.3em;letter-spacing:-.02em}.hero-type .l2{word-spacing:.82em}
 @media (hover:hover) and (pointer:fine){.hero-type a .l1{transition:letter-spacing .5s var(--ease)}.hero-type a:hover .l1{letter-spacing:-.03em}}
 .hero-type .l2{background:linear-gradient(180deg,#77777a 5%,rgba(150,150,152,.25) 75%,rgba(150,150,152,0) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero-me{position:absolute;left:50%;bottom:-2vh;height:min(76vh,calc(100vh - 16vw));height:min(76svh,calc(100svh - 16vw));min-height:320px;width:auto;max-width:none;transform:translateX(-40%);will-change:transform;
@@ -296,7 +297,7 @@ img,video,canvas{display:block}
 <!-- ============================== HERO -->
 <section id="hero">
   <h1 class="hero-type caps"><a data-book href="#talk" aria-label="Book a call now"><span class="l1">Book a</span><span class="l2">Call now</span></a></h1>
-  <img class="hero-me" src="img/me-car.png" alt="Yejin Lee in a leather jacket, leaning on a Mustang" width="1898" height="2024">
+  <img class="hero-me" src="img/me-car.png?v=2" alt="Yejin Lee in a leather jacket, leaning on a Mustang" width="1898" height="2128">
   <div class="hero-fade"></div>
   <div class="hero-l caps">(Scroll)&nbsp;&nbsp; Yejin Lee, 2026</div>
   <div class="hero-r caps"><span>Exited an app at 17. $90,000 in three months on TikTok Live. Founder of 1971, ranked #1 globally.</span>
