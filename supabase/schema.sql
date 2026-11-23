@@ -49,3 +49,28 @@ order by (l.tier = 'hot') desc, l.created_at desc;
 revoke all on public.leads, public.lead_packages from anon, authenticated;
 grant insert on public.leads, public.lead_packages to anon;
 revoke all on public.leads_overview from anon, authenticated;
+
+-- Click counts for the main links and "Book a call" buttons (elements marked data-track in the HTML).
+-- One row per click: which link and which page. Nothing about the visitor is stored.
+create table if not exists public.clicks (
+  id          bigint generated always as identity primary key,
+  created_at  timestamptz not null default now(),
+  label       text not null check (label ~ '^[a-z0-9-]{1,40}$'),
+  page        text check (char_length(page) <= 120)
+);
+
+alter table public.clicks enable row level security;
+
+drop policy if exists "site can add clicks" on public.clicks;
+create policy "site can add clicks" on public.clicks for insert to anon with check (true);
+
+-- Clicks per link, most clicked first (dashboard / service key only).
+create or replace view public.click_counts with (security_invoker = true) as
+select label, count(*) as clicks, min(created_at) as first_click, max(created_at) as last_click
+from public.clicks
+group by label
+order by clicks desc;
+
+revoke all on public.clicks from anon, authenticated;
+grant insert on public.clicks to anon;
+revoke all on public.click_counts from anon, authenticated;

@@ -87,8 +87,8 @@ input:focus,textarea:focus{border-bottom-color:#fff}
 <div class="stage" aria-hidden="true"><div class="big" id="ob-big">01</div><img class="car" src="img/mclaren-cut.png" alt=""></div>
 
 <header class="nav caps">
-  <a class="logo" href="index.html">YEJIN&bull;</a>
-  <a class="pill" href="index.html#services">&larr; Back to the portfolio</a>
+  <a class="logo" data-track="ob-logo" href="index.html">YEJIN&bull;</a>
+  <a class="pill" data-track="ob-back-to-portfolio" href="index.html#services">&larr; Back to the portfolio</a>
 </header>
 
 <main id="intake">
@@ -191,7 +191,7 @@ input:focus,textarea:focus{border-bottom-color:#fff}
           <div class="up-btns"><button class="pill fill caps" type="button" id="up-yes">I want the $500 package</button><button class="pill ghost caps" type="button" id="up-no">Keep the $250</button></div>
           <p class="note" id="up-note" hidden></p>
         </div>
-        <div class="btn-row"><a class="pill fill caps" id="book-link" href="#">Pick a call time<span aria-hidden="true">&#8599;</span></a></div>
+        <div class="btn-row"><a class="pill fill caps" id="book-link" data-track="ob-pick-call-time" href="#">Pick a call time<span aria-hidden="true">&#8599;</span></a></div>
         <p class="note" id="done-note">Your answers go with the booking, so the first call starts on your numbers.</p>
       </section>
 
@@ -202,6 +202,27 @@ input:focus,textarea:focus{border-bottom-color:#fff}
     </form>
 </main>
 
+<script>
+/* ---- Click counting ---------------------------------------------------------------------
+   Counts clicks on links marked data-track="label". Each click adds one row to the Supabase
+   "clicks" table (see supabase/schema.sql): the label and the page path, nothing about the visitor.
+   No cookies, no ids. Kept in its own script so it never depends on, or breaks, the rest of the page. */
+(() => {
+  const URL_ = 'https://sxminuesncnpeagozotu.supabase.co', KEY = 'sb_publishable_aOXagtRKkynyVB7cyrBqMA_AjouJnTs';
+  if (!URL_ || !KEY) return;
+  document.addEventListener('click', (e) => {
+    const el = e.target.closest && e.target.closest('[data-track]');
+    if (!el) return;
+    try {
+      fetch(URL_ + '/rest/v1/clicks', {
+        method: 'POST', keepalive: true,
+        headers: { 'Content-Type': 'application/json', apikey: KEY, Authorization: 'Bearer ' + KEY, Prefer: 'return=minimal' },
+        body: JSON.stringify({ label: el.dataset.track, page: location.pathname.slice(0, 120) })
+      }).catch(() => {});
+    } catch (_) {}
+  }, true);
+})();
+</script>
 <script>
 /* ---- Backend settings ------------------------------------------------------------------
    supabaseUrl / supabaseAnonKey: the project that stores leads (run supabase/schema.sql in it first).
